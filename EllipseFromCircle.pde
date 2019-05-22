@@ -39,10 +39,7 @@ void draw() {
   translate(transX, transY);
   background(0);
 
-  // show point
-  strokeWeight(4);
-  point(p.x, p.y);
-  strokeWeight(1);
+  connectMidCWithP(circle, p);
 
   circle.show();
 
@@ -53,6 +50,18 @@ void draw() {
       lines = circle.inscribeLines(p.x, p.y, nLines);
     }
   }
+}
+
+
+/*
+ * Connects the middle point of the circle and the point p
+ */
+void connectMidCWithP(Circle c, PVector p) {
+  strokeWeight(4);
+  point(p.x, p.y);
+  point(c.center.x, c.center.y);
+  strokeWeight(1);
+  line(p.x, p.y, c.center.x, c.center.y);
 }
 
 
