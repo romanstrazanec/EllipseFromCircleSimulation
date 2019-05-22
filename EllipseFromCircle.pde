@@ -48,17 +48,30 @@ void draw() {
 
   for (int i = 0; i < nLines; i++) {
     lines[i].show();
-    if (lines[i].angle <= 90) {
-      float rotation;
-      if (lines[i].angle <= 45) {
-        rotation = map(lines[i].angle, 0, 45, 0.3, 1.3);
-      } else {
-        rotation = map(lines[i].angle, 45, 90, 1.3, 0.3);
-      }
-      lines[i].rotateAtMiddleBy(rotation);
-    } else {
+    if (!rotateUntil90WithAnimation(lines[i], 0.3)) {
       p = randomPoint(circle.radius);
       lines = circle.inscribeLines(p.x, p.y, nLines);
     }
   }
+}
+
+
+/*
+ * Rotates given line until it reaches its 90 degree rotation around its mid-point.
+ * @param :line line to rotate
+ * @param :speed factor to fasten the speed of rotation
+ * @return true when the rotation was made, otherwise it's already rotated by 90 degrees
+ */
+boolean rotateUntil90WithAnimation(Line line, float speed) {
+  if (line.angle <= 90) {
+    float rotation;
+    if (line.angle <= 45) {
+      rotation = map(line.angle, 0, 45, speed, 1 + speed);  // speeding up
+    } else {
+      rotation = map(line.angle, 45, 90, 1 + speed, speed);  // slowing down
+    }
+    line.rotateAtMiddleBy(rotation);
+    return true;
+  }
+  return false;
 }
