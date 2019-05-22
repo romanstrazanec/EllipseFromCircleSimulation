@@ -6,12 +6,12 @@ class Circle {
     center = new PVector(x, y);
     radius = r;
   }
-  
+
   Line[] inscribeLines(float x, float y, int n) {
     Line[] lines = new Line[n];
-    for(int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
       float angle = i * TWO_PI/n;
-      lines[i] = new Line(x, y, radius*cos(angle)+center.x, radius*sin(angle)+center.y);
+      lines[i] = new Line(x, y, radius*cos(angle) + center.x, radius*sin(angle) + center.y);
     }
     return lines;
   }

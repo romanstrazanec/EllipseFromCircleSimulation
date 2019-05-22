@@ -5,7 +5,7 @@ class Line {
   Line(float x1, float y1, float x2, float y2) {
     start = new PVector(x1, y1);
     end = new PVector(x2, y2);
-    angle = 0;
+    angle = 0;  // not the actual angle of the line, only to store value how the line was rotated
   }
 
   PVector middle() {
@@ -20,24 +20,23 @@ class Line {
 
   void rotateAtMiddleBy(float a) {
     final PVector m = middle();
-    final float r = len()/2;
-    
+
     angle += a;
     a = radians(a);
-    
+
     while (angle >= 360) angle -= 360;
     while (angle <= -360) angle += 360;
 
     float s = sin(a), c = cos(a), x, y;
     x = start.x - m.x;
     y = start.y - m.y;
-    
+
     start.x = (x*c - y*s) + m.x;
     start.y = (x*s + y*c) + m.y;
-    
+
     x = end.x - m.x;
     y = end.y - m.y;
-    
+
     end.x = (x*c - y*s) + m.x;
     end.y = (x*s + y*c) + m.y;
   }
