@@ -3,14 +3,13 @@ Line[] lines;
 final int nLines = 20;  // number of lines inscribing the circle
 float transX, transY;   // values of display translation so the circle is in the middle
 PVector p;              // point where all lines start
-float radius;           // radius of the circle
 
 /*
  * @param :r radius of the circle where the point will be created in
  * @return   PVector (the random point) with x, y coordinates within a circle with a radius :r
  */
 PVector randomPoint(float r) {
-  return PVector.random2D().mult(r);
+  return PVector.random2D().mult(random(r));
 }
 
 
@@ -22,23 +21,29 @@ void setup() {
   transX = width/2;
   transY = height/2;
 
-  radius = height/2;  // set radius of the circle to half of the height of the screen as its width is much more wider
-  circle = new Circle(0, 0, radius);  // create circle in the middle
+  circle = new Circle(0, 0, height/2);  // create circle in the middle
 
-  p = randomPoint(radius);  // set random point
-  lines = circle.inscribeLines(p.x, p.y, nLines);  // inscribe n lines from the point p 
+  p = randomPoint(circle.radius);  // set random point
+  lines = circle.inscribeLines(p.x, p.y, nLines);  // inscribe n lines from the point p
 }
 
+
 void draw() {
+
+  // create new point based on mouse position
   if (mousePressed) {
-    p = new PVector(mouseX-transX, mouseY-transY);
+    p = new PVector(mouseX - transX, mouseY - transY);
     lines = circle.inscribeLines(p.x, p.y, nLines);
   }
 
   translate(transX, transY);
   background(0);
 
+  // show point
+  strokeWeight(4);
   point(p.x, p.y);
+  strokeWeight(1);
+
   circle.show();
 
   for (int i = 0; i < nLines; i++) {
@@ -52,11 +57,8 @@ void draw() {
       }
       lines[i].rotateAtMiddleBy(rotation);
     } else {
-      lines = circle.inscribeLines(
-        random(-circle.radius, circle.radius), 
-        random(-circle.radius, circle.radius), 
-        nLines
-        );
+      p = randomPoint(circle.radius);
+      lines = circle.inscribeLines(p.x, p.y, nLines);
     }
   }
 }
