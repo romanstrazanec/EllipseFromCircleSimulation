@@ -28,7 +28,7 @@ void setup() {
 
   p = randomPoint(circle.radius);  // set random point
   lines = circle.inscribeLines(p.x, p.y, nLines);  // inscribe n lines from the point p
-  constLines = circle.inscribeLines(p.x, p.y, nLines);;
+  constLines = circle.inscribeLines(p.x, p.y, nLines);
 
   step = 1;
 }
