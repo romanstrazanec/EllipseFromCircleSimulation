@@ -10,6 +10,12 @@ Rotating every line around its mid-point by 90 degrees creates an ellipse with t
 
 ![End](img/end.jpg)
 
+## Instructions
+
+To run the simulation *[Processing](https://processing.org/)* needs to be installed.
+After installation open *EllipseFromCircle.pde* and run.
+While running, pressing the mouse button sets new point from which the lines are going to be created.
+
 ## Reference
 
 - The topic was mentioned in the [video](https://www.youtube.com/watch?v=xdIjYBtnvZU&t=158s)
