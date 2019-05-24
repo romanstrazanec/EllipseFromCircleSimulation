@@ -1,6 +1,7 @@
 Circle circle;
 Line[] lines;
-final int nLines = 360;  // number of lines inscribing the circle
+Line[] constLines;      // lines which stay in their starting position
+final int nLines = 90;  // number of lines inscribing the circle
 float transX, transY;   // values of display translation so the circle is in the middle
 PVector p;              // point where all lines start
 int step;               // step to start every line after each other
@@ -16,8 +17,8 @@ PVector randomPoint(float r) {
 
 
 void setup() {
-  // fullScreen();
-  size(600, 600);
+  fullScreen();
+  // size(600, 600);
 
   // move the display to the center of the screen
   transX = width/2;
@@ -27,6 +28,7 @@ void setup() {
 
   p = randomPoint(circle.radius);  // set random point
   lines = circle.inscribeLines(p.x, p.y, nLines);  // inscribe n lines from the point p
+  constLines = circle.inscribeLines(p.x, p.y, nLines);;
 
   step = 1;
 }
@@ -38,17 +40,19 @@ void draw() {
   if (mousePressed) {
     p = new PVector(mouseX - transX, mouseY - transY);
     lines = circle.inscribeLines(p.x, p.y, nLines);
+    constLines = circle.inscribeLines(p.x, p.y, nLines);
   }
 
   translate(transX, transY);
   background(0);
 
-  connectMidCWithP(circle, p);
+  // connectMidCWithP(circle, p);
 
   circle.show();
 
   for (int i = 0; i < nLines; i++) {
     lines[i].show();
+    constLines[i].show(100);
 
     // alwaysRotate(lines[i], pow(1.01, i));
     // alwaysRotate(lines[i], ((i % 2) * 2 - 1) * (i*1.5) / nLines);
