@@ -17,7 +17,7 @@ class Circle {
   }
 
   void show() {
-    stroke(255);
+    stroke(150, 150, 255);
     noFill();
     ellipse(center.x, center.y, radius*2, radius*2);
   }
