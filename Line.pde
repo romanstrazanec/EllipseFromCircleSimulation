@@ -45,4 +45,9 @@ class Line {
     stroke(255);
     line(start.x, start.y, end.x, end.y);
   }
+
+  void show(int alpha) {
+    stroke(255, alpha);
+    line(start.x, start.y, end.x, end.y);
+  }
 }
